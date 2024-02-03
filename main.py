@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from starlette.staticfiles import StaticFiles
 
 app = FastAPI()
-app.mount("/names", StaticFiles(directory="names", html=True), name="names")
+app.mount("/temp", StaticFiles(directory="temp", html=True), name="temp")
+
 
 @app.get("/")
 async def root():
@@ -12,6 +13,6 @@ async def root():
 @app.get("/hello/{name}")
 async def say_hello(name: str):
 
-    with open(f"names/welcomed.txt", "at+") as file:
+    with open(f"temp/welcomed.txt", "at+") as file:
         file.write(f"{name}\n")
     return {"message": f"Hello {name}"}
